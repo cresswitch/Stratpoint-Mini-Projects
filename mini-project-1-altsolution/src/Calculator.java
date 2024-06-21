@@ -5,7 +5,7 @@
 // Can catch: invalid number inputs, invalid operators, division by 0, invalid parentheses
 // Bad error handling through exit calls instead of exceptions
 // Cannot catch: overflow
-// Fails some test cases due to string handling
+// Limited sign handling (cannot evaluate things such as -------1)
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -31,9 +31,6 @@ public class Calculator {
             System.exit(0);
         }
 
-        // test
-        System.out.println(str);
-
         // recursively take care of expressions within parentheses
         // makes sure that correct sets of expressions are handled
         while(str.contains("(")){
@@ -56,7 +53,7 @@ public class Calculator {
         ArrayList<String> arrList = new ArrayList<>();
         int counter = 1;
         while(!str.isEmpty()){
-            if(counter < str.length() && str.substring(0, counter).matches(".*[+*/-].*")){
+            if(counter < str.length() && str.substring(counter-1, counter).matches(".*[+*/-].*")){
                 arrList.add(str.substring(0,counter-1));
                 arrList.add(str.substring(counter-1, counter));
                 str = str.substring(counter);
@@ -71,21 +68,49 @@ public class Calculator {
             }
         }
 
+        // remove blank space
+        for(int a = 0; a < arrList.size();a++){
+            if(arrList.get(a).isBlank()){
+                arrList.remove(a);
+                a--;
+            }
+        }
+
+        // merge negative numbers and redundant positive signs
+        if(arrList.size() > 2){
+            for(int a = 0; a < arrList.size() - 2; a++){
+                if(arrList.get(a).matches(".*[+*/-].*") && arrList.get(a+1).matches(".*[+-].*")
+                        && arrList.get(a+2).matches(".*[0-9].*")){
+                    arrList.set(a+2, arrList.get(a+1) + arrList.get(a+2));
+                    arrList.remove(a+1);
+                }
+                else if(a == 0 && arrList.get(a).matches(".*[+-].*") && arrList.get(a+2).matches(".*[0-9].*")){
+                    arrList.set(a+1, arrList.get(a) + arrList.get(a+1));
+                    arrList.remove(a);
+                }
+            }
+        }
+        else if(arrList.size() > 1 && (arrList.get(0).matches(".*[+-].*") && arrList.get(1).matches(".*[0-9].*"))){
+            arrList.set(0, arrList.get(0) + arrList.get(1));
+            arrList.remove(1);
+        }
+
         // checks for operators at the start and end of expression
-        if(arrList.get(0).matches(".*[+*/-].*") || arrList.get(arrList.size()-1).matches(".*[+*/-].*")){
+        if(arrList.get(0).equals("+") || arrList.get(0).equals("-") || arrList.get(0).equals("*")
+                || arrList.get(0).equals("/") || arrList.get(arrList.size()-1).equals("+")
+                || arrList.get(arrList.size()-1).equals("-") || arrList.get(arrList.size()-1).equals("*")
+                || arrList.get(arrList.size()-1).equals("/")){
             System.out.println("Error with placement of operators");
             System.exit(0);
         }
 
         // checks for operators beside each other
         for(int a = 1; a < arrList.size() - 1; a++){
-            if(arrList.get(a).matches(".*[+*/-].*") && arrList.get(a+1).matches(".*[+*/-].*")){
+            if(arrList.get(a).matches(".*[+*/-].*") && arrList.get(a+1).matches(".*[+*/].*")){
                 System.out.println("Error with placement of operators");
                 System.exit(0);
             }
         }
-
-
 
         // do all multiplication and division (left to right)
         for(int a = 0; a < arrList.size(); a++){

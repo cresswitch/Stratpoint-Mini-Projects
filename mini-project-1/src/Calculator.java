@@ -28,6 +28,28 @@ public class Calculator {
         return out;
     }
 
+    // function to handle operator input
+    public static String handleOp(String str, Scanner scanner){
+        boolean valid = false;
+
+        while(!valid){
+            try{
+                if(str.equals("+") || str.equals("-")
+                        || str.equals("*") || str.equals("/")){
+                    valid = true;
+                }
+                else{
+                    throw new Exception();
+                }
+            } catch(Exception e){
+                System.out.println("Invalid operation, try again:");
+                str = scanner.nextLine();
+            }
+        }
+
+        return str;
+    }
+
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         boolean cont = true;
@@ -40,15 +62,8 @@ public class Calculator {
         arg1 = handleInput(scanner.nextLine(), scanner);
 
         while(cont){
-            while(!operator.equals("+") && !operator.equals("-")
-                    && !operator.equals("*") && !operator.equals("/")){
-                System.out.println("Enter operator (+, -, *, /)");
-                operator = scanner.nextLine();
-                if(!operator.equals("+") && !operator.equals("-")
-                        && !operator.equals("*") && !operator.equals("/")){
-                    System.out.println("Invalid operation, try again:");
-                }
-            }
+            System.out.println("Enter operator: ");
+            operator = handleOp(scanner.nextLine(), scanner);
 
             System.out.println("Enter second number: ");
             arg2 = handleInput(scanner.nextLine(), scanner);
@@ -64,11 +79,21 @@ public class Calculator {
                     result = arg1 * arg2;
                     break;
                 case "/":
-                    while(arg2 == 0){
-                        System.out.println("Error, cannot divide by 0. Enter new divisor: ");
-                        arg2 = handleInput(scanner.nextLine(), scanner);
+                    boolean valid = false;
+                    while(!valid){
+                        try{
+                            result = arg1 / arg2;
+                            if(result == Double.POSITIVE_INFINITY || result == Double.NEGATIVE_INFINITY){
+                                throw new ArithmeticException();
+                            }
+                            else{
+                                valid = true;
+                            }
+                        } catch(ArithmeticException e){
+                            System.out.println("Error, cannot divide by 0. Enter new divisor: ");
+                            arg2 = handleInput(scanner.nextLine(), scanner);
+                        }
                     }
-                    result = arg1 / arg2;
                     break;
             }
 
