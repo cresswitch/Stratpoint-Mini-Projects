@@ -18,23 +18,23 @@ public class Book {
     }
 
     // initialize new Book object with initial values
-    public Book(String t, String a, String i){
-        this.title = t;
-        this.author = a;
-        this.isbn = i;
+    public Book(String title, String author, String isbn){
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
     }
 
     // setter methods
-    public void setTitle(String t){
-        this.title = t;
+    public void setTitle(String title){
+        this.title = title;
     }
 
-    public void setAuthor(String a){
-        this.author = a;
+    public void setAuthor(String author){
+        this.author = author;
     }
 
-    public void setIsbn(String i){
-        this.isbn = i;
+    public void setIsbn(String isbn){
+        this.isbn = isbn;
     }
 
     // getter methods

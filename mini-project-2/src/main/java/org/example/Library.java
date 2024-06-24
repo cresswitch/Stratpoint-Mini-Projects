@@ -85,13 +85,18 @@ public class Library extends BookCollection {
 
     public BookCollection searchBook(String str){
         // new set of books to hold eligible search targets
-        // for now the search does not look for "close enough", but only exact matches disregarding case
+        // returns exact matches or partial matches (contains the substring being searched for)
         BookCollection search = new BookCollection();
         str = str.toLowerCase();
 
         for(Book book : this.bookList){
             if(book.getTitle().toLowerCase().equals(str) || book.getAuthor().toLowerCase().equals(str)
                     || book.getIsbn().toLowerCase().equals(str)){
+                search.addBook(book);
+            }
+            else if(book.getTitle().toLowerCase().matches(".*[" + str + "].*")
+                    || book.getAuthor().toLowerCase().matches(".*[" + str + "].*")
+                    || book.getIsbn().toLowerCase().matches(".*[" + str + "].*")){
                 search.addBook(book);
             }
         }
