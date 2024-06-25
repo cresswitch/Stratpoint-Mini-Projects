@@ -90,13 +90,9 @@ public class Library extends BookCollection {
         str = str.toLowerCase();
 
         for(Book book : this.bookList){
-            if(book.getTitle().toLowerCase().equals(str) || book.getAuthor().toLowerCase().equals(str)
-                    || book.getIsbn().toLowerCase().equals(str)){
-                search.addBook(book);
-            }
-            else if(book.getTitle().toLowerCase().matches(".*[" + str + "].*")
-                    || book.getAuthor().toLowerCase().matches(".*[" + str + "].*")
-                    || book.getIsbn().toLowerCase().matches(".*[" + str + "].*")){
+            if(book.getTitle().toLowerCase().matches(".*" + str + ".*")
+                    || book.getAuthor().toLowerCase().matches(".*" + str + ".*")
+                    || book.getIsbn().toLowerCase().matches(".*" + str + ".*")){
                 search.addBook(book);
             }
         }

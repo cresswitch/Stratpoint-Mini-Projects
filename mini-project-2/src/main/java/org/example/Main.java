@@ -1,6 +1,6 @@
 // Written by: Beatriz Franco
 // Main.java
-// Contains Main function with user interaction
+// Contains Main class with user interaction
 
 package org.example;
 
@@ -20,19 +20,18 @@ public class Main {
         // misc initializing
         Scanner scanner = new Scanner(System.in);
         boolean continueLoop = true;
-        String response = "";
-        String title = "";
-        String author = "";
-        String isbn = "";
-        String query = "";
-        Pattern isbnFormat13 = Pattern.compile("\\d{3}-\\d{2}-\\d{5}-\\d{2}-\\d{1}");
-        Pattern isbnFormat10 = Pattern.compile("\\d{1}-\\d{3}-\\d{5}-\\d{1}");
+        String response;
+        String title;
+        String author;
+        String isbn;
+        Pattern isbnFormat13 = Pattern.compile("\\d{3}-\\d{2}-\\d{5}-\\d{2}-\\d");
+        Pattern isbnFormat10 = Pattern.compile("\\d-\\d{3}-\\d{5}-\\d");
 
         // user loop
         while(continueLoop){
             System.out.println("Enter 'a' to add book, 'p' to see all books, 'r' to remove a book, 's' to search for a book, or anything else to exit.");
-            response = scanner.nextLine();
-            if(response.equalsIgnoreCase("a")){
+            response = scanner.nextLine().toLowerCase();
+            if(response.equals("a")){
                 // add a book
                 System.out.print("Enter the title: ");
                 title = scanner.nextLine();
@@ -61,16 +60,16 @@ public class Main {
                 library.addBook(new Book(title, author, isbn));
                 System.out.println("Book added.");
             }
-            else if(response.equalsIgnoreCase("p")){
+            else if(response.equals("p")){
                 // print library
                 library.printBookList();
             }
-            else if(response.equalsIgnoreCase("r")){
+            else if(response.equals("r")){
                 // remove book/s
                 System.out.print("Remove: ");
                 library.removeBook(scanner.nextLine());
             }
-            else if(response.equalsIgnoreCase("s")){
+            else if(response.equals("s")){
                 // search for book/s
                 System.out.print("Search for: ");
                 library.searchBook(scanner.nextLine());
