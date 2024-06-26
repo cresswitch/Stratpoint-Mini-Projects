@@ -43,5 +43,6 @@ public class BookCollection {
 
     public void addBook(Book book){
         this.bookList.add(book);
+        System.out.println("Book added.");
     }
 }

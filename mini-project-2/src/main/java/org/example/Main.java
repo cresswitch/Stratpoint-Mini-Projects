@@ -59,7 +59,6 @@ public class Main {
 
                     // new Book in Library
                     library.addBook(new Book(title, author, isbn));
-                    System.out.println("Book added.");
                 }
                 case "p" ->
                     // print library
