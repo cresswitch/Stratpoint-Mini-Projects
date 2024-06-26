@@ -12,11 +12,6 @@ public class Main {
         // main function
         Library library = new Library();
 
-        // test library additions
-        library.addBook(new Book("book1", "author1", "1-111-11111-1"));
-        library.addBook(new Book("book2", "author2", "2-222-22222-2"));
-        library.addBook(new Book("book3", "author1", "3-333-33333-3"));
-
         // misc initializing
         Scanner scanner = new Scanner(System.in);
         boolean continueLoop = true;
