@@ -98,12 +98,11 @@ public class Library extends BookCollection {
 
         if(!search.getBookList().isEmpty()){
             System.out.println("We found " + search.getBookList().size() + " result/s:");
+            search.printBookList();
         }
         else{
             System.out.println("Sorry, we could not find any matches.");
         }
-
-        search.printBookList();
 
         return search;
     }
