@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
 
-class MyFirstJUnitJupiterTests {
+class LibraryTest {
 
     @Test
     void directAddRemove(){
