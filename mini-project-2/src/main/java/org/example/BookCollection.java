@@ -57,14 +57,39 @@ public class BookCollection {
     public void addBook(Scanner scanner){
         Pattern isbnFormat13 = Pattern.compile("\\d{13}");
         Pattern isbnFormat10 = Pattern.compile("\\d{10}");
-        String title, author;
-        String isbn = "";
+        String title, author, isbn = "";
 
-        System.out.print("Enter the title: ");
-        title = scanner.nextLine();
+        // prevent empty title
+        while(true){
+            System.out.print("Enter the title: ");
+            title = scanner.nextLine();
+            try{
+                if(title.equals("\n")){
+                    break;
+                }
+                else{
+                    throw new Exception("Empty string");
+                }
+            } catch(Exception e){
+                System.out.println("Empty string detected. Please enter some text.");
+            }
+        }
 
-        System.out.print("Enter the author: ");
-        author = scanner.nextLine();
+        // prevent empty author
+        while(true){
+            System.out.print("Enter the author: ");
+            author = scanner.nextLine();
+            try{
+                if(author.equals("\n")){
+                    break;
+                }
+                else{
+                    throw new Exception("Empty string");
+                }
+            } catch(Exception e){
+                System.out.println("Empty string detected. Please enter some text.");
+            }
+        }
 
         // check ISBN format
         while (true) {
