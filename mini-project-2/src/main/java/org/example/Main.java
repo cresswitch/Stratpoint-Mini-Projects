@@ -53,6 +53,7 @@ public class Main {
                             }
                         } catch (Exception e) {
                             System.out.println("Invalid ISBN! Please enter a 10 or 13 digit ISBN with dashes.");
+                            System.out.println("Format: X-XXX-XXXXX-X or XXX-X-XX-XXXXXX-X");
                         }
                     }
 
