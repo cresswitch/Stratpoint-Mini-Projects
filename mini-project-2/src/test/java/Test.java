@@ -45,6 +45,7 @@ class MyFirstJUnitJupiterTests {
         assertEquals(library.searchBook("auth1").getBookList().get(0), testBooks.getBookList().get(0));
         assertEquals(library.searchBook("auth1").getBookList().get(1), testBooks.getBookList().get(1));
         assertEquals(library.searchBook("auth1").getBookList().size(), testBooks.getBookList().size());
+        assertEquals(0, library.searchBook("auth3").getBookList().size());
     }
 
 }
