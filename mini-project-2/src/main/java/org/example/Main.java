@@ -5,7 +5,6 @@
 package org.example;
 
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,11 +15,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean continueLoop = true;
         String response;
-        String title;
-        String author;
-        String isbn;
-        Pattern isbnFormat13 = Pattern.compile("\\d{13}");
-        Pattern isbnFormat10 = Pattern.compile("\\d{10}");
 
         // user loop
         while(continueLoop){
@@ -29,30 +23,7 @@ public class Main {
             switch (response) {
                 case "a" -> {
                     // add a book
-                    System.out.print("Enter the title: ");
-                    title = scanner.nextLine();
-
-                    System.out.print("Enter the author: ");
-                    author = scanner.nextLine();
-
-                    // check ISBN format
-                    while (true) {
-                        System.out.print("Enter the ISBN: ");
-                        isbn = scanner.nextLine();
-                        try {
-                            if (isbnFormat10.matcher(isbn).matches()
-                                    || isbnFormat13.matcher(isbn).matches()) {
-                                break;
-                            } else {
-                                throw new Exception("Invalid ISBN");
-                            }
-                        } catch (Exception e) {
-                            System.out.println("Invalid ISBN! Please enter a 10 or 13 digit ISBN without dashes.");
-                        }
-                    }
-
-                    // new Book in Library
-                    library.addBook(new Book(title, author, isbn));
+                    library.addBook(scanner);
                 }
                 case "p" ->
                     // print library

@@ -5,6 +5,8 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class BookCollection {
     // protected and not private so Library can also access it
@@ -46,8 +48,40 @@ public class BookCollection {
         }
     }
 
+    // method to add book from existing book
     public void addBook(Book book){
         this.bookList.add(book);
+    }
+
+    // method to add book from user input
+    public void addBook(Scanner scanner){
+        Pattern isbnFormat13 = Pattern.compile("\\d{13}");
+        Pattern isbnFormat10 = Pattern.compile("\\d{10}");
+        String title, author;
+        String isbn = "";
+
+        System.out.print("Enter the title: ");
+        title = scanner.nextLine();
+
+        System.out.print("Enter the author: ");
+        author = scanner.nextLine();
+
+        // check ISBN format
+        while (true) {
+            System.out.print("Enter the ISBN: ");
+            isbn = scanner.nextLine();
+            try {
+                if (isbnFormat10.matcher(isbn).matches()
+                        || isbnFormat13.matcher(isbn).matches()) {
+                    break;
+                } else {
+                    throw new Exception("Invalid ISBN");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid ISBN. Please enter a 10 or 13 digit ISBN without dashes.");
+            }
+        }
+        this.bookList.add(new Book(title, author, isbn));
         System.out.println("Book added.");
     }
 }
