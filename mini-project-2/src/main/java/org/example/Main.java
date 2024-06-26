@@ -19,8 +19,8 @@ public class Main {
         String title;
         String author;
         String isbn;
-        Pattern isbnFormat13 = Pattern.compile("\\d{3}-\\d{2}-\\d{5}-\\d{2}-\\d");
-        Pattern isbnFormat10 = Pattern.compile("\\d-\\d{3}-\\d{5}-\\d");
+        Pattern isbnFormat13 = Pattern.compile("\\d{13}");
+        Pattern isbnFormat10 = Pattern.compile("\\d{10}");
 
         // user loop
         while(continueLoop){
@@ -47,8 +47,7 @@ public class Main {
                                 throw new Exception("Invalid ISBN");
                             }
                         } catch (Exception e) {
-                            System.out.println("Invalid ISBN! Please enter a 10 or 13 digit ISBN with dashes.");
-                            System.out.println("Format: X-XXX-XXXXX-X or XXX-X-XX-XXXXXX-X");
+                            System.out.println("Invalid ISBN! Please enter a 10 or 13 digit ISBN without dashes.");
                         }
                     }
 
