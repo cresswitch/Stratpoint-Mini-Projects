@@ -32,12 +32,17 @@ public class BookCollection {
 
     // methods
     public void printBookList(){
-        for (int a = 0; a < this.bookList.size(); a++) {
-            System.out.println(a+1);
-            System.out.println("Title: " + this.bookList.get(a).getTitle());
-            System.out.println("Author: " + this.bookList.get(a).getAuthor());
-            System.out.println("ISBN: " + this.bookList.get(a).getIsbn());
-            System.out.println(" ");
+        if(this.bookList.isEmpty()){
+            System.out.println("No books in this library yet.");
+        }
+        else{
+            for (int a = 0; a < this.bookList.size(); a++) {
+                System.out.println(a+1);
+                System.out.println("Title: " + this.bookList.get(a).getTitle());
+                System.out.println("Author: " + this.bookList.get(a).getAuthor());
+                System.out.println("ISBN: " + this.bookList.get(a).getIsbn());
+                System.out.println(" ");
+            }
         }
     }
 
