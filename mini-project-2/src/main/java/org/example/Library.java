@@ -19,10 +19,9 @@ public class Library extends BookCollection {
     }
 
     // methods
-    public void removeBook(String str){
+    public void removeBook(String str, Scanner scanner){
         // use search function to look for removable candidates
         BookCollection search = this.searchBook(str);
-        Scanner scanner = new Scanner(System.in);
 
         // no removal if no match
         if(search.getBookList().isEmpty()){

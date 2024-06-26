@@ -31,52 +31,51 @@ public class Main {
         while(continueLoop){
             System.out.println("Enter 'a' to add book, 'p' to see all books, 'r' to remove a book, 's' to search for a book, or anything else to exit.");
             response = scanner.nextLine().toLowerCase();
-            if(response.equals("a")){
-                // add a book
-                System.out.print("Enter the title: ");
-                title = scanner.nextLine();
+            switch (response) {
+                case "a" -> {
+                    // add a book
+                    System.out.print("Enter the title: ");
+                    title = scanner.nextLine();
 
-                System.out.print("Enter the author: ");
-                author = scanner.nextLine();
+                    System.out.print("Enter the author: ");
+                    author = scanner.nextLine();
 
-                // check ISBN format
-                while(true){
-                    System.out.print("Enter the ISBN: ");
-                    isbn = scanner.nextLine();
-                    try{
-                        if(isbnFormat10.matcher(isbn).matches()
-                                || isbnFormat13.matcher(isbn).matches()){
-                            break;
+                    // check ISBN format
+                    while (true) {
+                        System.out.print("Enter the ISBN: ");
+                        isbn = scanner.nextLine();
+                        try {
+                            if (isbnFormat10.matcher(isbn).matches()
+                                    || isbnFormat13.matcher(isbn).matches()) {
+                                break;
+                            } else {
+                                throw new Exception("Invalid ISBN");
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Invalid ISBN! Please enter a 10 or 13 digit ISBN with dashes.");
                         }
-                        else{
-                            throw new Exception("Invalid ISBN");
-                        }
-                    } catch(Exception e){
-                        System.out.println("Invalid ISBN! Please enter a 10 or 13 digit ISBN with dashes.");
                     }
-                }
 
-                // new Book in Library
-                library.addBook(new Book(title, author, isbn));
-                System.out.println("Book added.");
-            }
-            else if(response.equals("p")){
-                // print library
-                library.printBookList();
-            }
-            else if(response.equals("r")){
-                // remove book/s
-                System.out.print("Remove: ");
-                library.removeBook(scanner.nextLine());
-            }
-            else if(response.equals("s")){
-                // search for book/s
-                System.out.print("Search for: ");
-                library.searchBook(scanner.nextLine());
-            }
-            else{
-                // exit loop
-                continueLoop = false;
+                    // new Book in Library
+                    library.addBook(new Book(title, author, isbn));
+                    System.out.println("Book added.");
+                }
+                case "p" ->
+                    // print library
+                        library.printBookList();
+                case "r" -> {
+                    // remove book/s
+                    System.out.print("Remove: ");
+                    library.removeBook(scanner.nextLine(), scanner);
+                }
+                case "s" -> {
+                    // search for book/s
+                    System.out.print("Search for: ");
+                    library.searchBook(scanner.nextLine());
+                }
+                default ->
+                    // exit loop
+                        continueLoop = false;
             }
         }
     }
