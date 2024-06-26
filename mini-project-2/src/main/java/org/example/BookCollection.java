@@ -64,7 +64,7 @@ public class BookCollection {
             System.out.print("Enter the title: ");
             title = scanner.nextLine();
             try{
-                if(title.equals("\n")){
+                if(!title.equals("\n")){
                     break;
                 }
                 else{
@@ -80,7 +80,7 @@ public class BookCollection {
             System.out.print("Enter the author: ");
             author = scanner.nextLine();
             try{
-                if(author.equals("\n")){
+                if(!author.equals("\n")){
                     break;
                 }
                 else{
